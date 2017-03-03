@@ -15,16 +15,20 @@ public class MaxMaxDifference {
         int firstMax = first;
         int lastMax = last;
 
+        int maxPos = 0;
+
+
         for (int index = 0; index < a.length - 1; index++) {
-            firstMax = Math.max(firstMax, a[index]);
-            lastMax = Math.max(lastMax, a[index + 1]);
+            int tempMax = Math.max(firstMax, a[index]);
+            if (tempMax > firstMax) {
+                firstMax = tempMax;
+                maxPos = index;
+            }
         }
 
-        /*
         for(int index = maxPos + 1; index < a.length; index++) {
             lastMax = Math.max(lastMax, a[index]);
         }
-        */
 
         int diff = Math.max(Math.abs(first - last), Math.abs(first - firstMax));
         diff = Math.max(diff, Math.abs(firstMax - lastMax));
