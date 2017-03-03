@@ -17,10 +17,10 @@ import static org.junit.Assert.assertEquals;
 public class TestMaxMaxDifference {
 
     private static int MAX = 1000000;
+    private final Random rng = new Random();
     private MaxMaxDifference underTest = new MaxMaxDifference();
     private int[] random100000;
-    private int[] random1000000;
-
+    private int[] random1000000;// Ideally just create one instance globally
 
     @Before
     public void setUp() throws Exception {
@@ -69,12 +69,9 @@ public class TestMaxMaxDifference {
             throw new IllegalArgumentException("Can't ask for more numbers than are available");
         }
 
-        Random rng = new Random(); // Ideally just create one instance globally
-        // Note: use LinkedHashSet to maintain insertion order
         List<Integer> generated = new ArrayList<>();
         while (generated.size() < elements) {
             Integer next = rng.nextInt(MAX) + 1;
-            // As we're adding to a set, this will automatically do a containment check
             generated.add(next);
         }
         return generated.stream().mapToInt(i -> i).toArray();
